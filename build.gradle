@@ -18,7 +18,7 @@ application {
     mainClass = 'surredstone.Plugin'
 }
 
-task build {
+task copyFiles {
     copy {
         from "src/main/resources/plugin.yml"
         into "$buildDir/resources/main"
@@ -36,6 +36,6 @@ task build {
 }
 
 jar {
-    dependsOn build
+    dependsOn copyFiles
     archiveFileName = "Surredstone.jar"
 }
