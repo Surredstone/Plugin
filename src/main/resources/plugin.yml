@@ -9,3 +9,19 @@ commands:
     aliases: [g]
     description: Manda uma mensagem para todos no servidor
     permission: surredstone.global
+  village:
+    aliases: [vil]
+    description: Gerencia uma vila
+permissions:
+  surredstone.*:
+    default: false
+    description: Todas as permissões do plugin
+  surredstone.global: 
+    default: true
+    description: Executar o comando /global
+  surredstone.village.*:
+    default: false
+    description: Executar todos os subcomandos do comando /village
+  surredstone.village.info:
+    default: true
+    description: Executar o subcomando /village info
