@@ -3,10 +3,10 @@
 
 # Ignore Gradle build output directory
 build
-
 bin
-gradle
 
+# Vscode workspace settings
 .vscode
 
-server
+# Minecraft test server path
+/server
