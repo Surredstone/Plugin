@@ -9,8 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class Village {
-    final String INVALID_VILLAGE_STORAGE_ERROR = "Invalid Village Storage";
-
     final int id;
     String name;
     String abbreviation;
@@ -26,7 +24,7 @@ public class Village {
             String color,
             String flag) {
         if (abbreviation.contains(" ") || abbreviation.contains("   "))
-            throw new Error(INVALID_VILLAGE_STORAGE_ERROR);
+            throw new Error(Message.INVALID_VILLAGE_STORAGE_ERROR);
 
         this.id = id;
         this.name = name;
@@ -78,7 +76,7 @@ public class Village {
                 return village;
             }
         }
-        
+
         return null;
     }
 
