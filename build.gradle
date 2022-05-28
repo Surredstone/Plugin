@@ -1,5 +1,5 @@
 plugins {
-    id 'application'
+    id "application"
 }
 
 repositories {
@@ -10,32 +10,27 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation "com.google.guava:guava:30.1.1-jre"
     compileOnly "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
 }
 
-application {
-    mainClass = 'surredstone.Plugin'
+task copyFiles(type: Copy) {
+    from "src/main/resources/plugin.yml"
+    into ("$buildDir/resources/main")
+    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+        name: project.name,
+        description: project.description,
+        version: project.version
+    ])
 }
 
-task copyFiles {
-    copy {
-        from "src/main/resources/plugin.yml"
-        into "$buildDir/resources/main"
-        filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
-            name: project.name,
-            description: project.description,
-            version: project.version
-        ])
-    }
-
-    copy {
-        from "$buildDir/libs/Surredstone.jar"
-        into "server/plugins"
-    }
+task copyPluginJar(type: Copy) {
+    from ("$buildDir/libs/Surredstone.jar")
+    into "server/plugins"
 }
 
 jar {
     dependsOn copyFiles
+    finalizedBy copyPluginJar
     archiveFileName = "Surredstone.jar"
 }
