@@ -10,7 +10,7 @@ import surredstone.Message;
 import surredstone.Plugin;
 import surredstone.Village;
 
-public class Global implements CommandExecutor {
+public class GlobalCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
