@@ -11,9 +11,11 @@ import surredstone.Village;
 public class PlayerChat implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        event.setCancelled(true);
-
         Village playerVillage = Village.getVillageByPlayer(event.getPlayer());
+
+        if (playerVillage == null) {
+            return;
+        }
 
         for (Player player : playerVillage.getOnlinePlayers()) {
             player.sendMessage(String.format(
@@ -24,5 +26,7 @@ public class PlayerChat implements Listener {
                 player.getName(),
                 event.getMessage()));
         }
+
+        event.setCancelled(true);
     }
 }
