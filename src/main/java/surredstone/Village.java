@@ -2,9 +2,11 @@ package surredstone;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 public class Village {
     final String INVALID_VILLAGE_STORAGE_ERROR = "Invalid Village Storage";
@@ -70,8 +72,22 @@ public class Village {
         return villages.stream().filter(village -> village.id == id).findFirst().orElse(null);
     }
 
+    public List<Player> getOnlinePlayers() {
+        Collection<? extends Player> onlinePlayers = Plugin.getInstance().getServer().getOnlinePlayers();
+
+        List<Player> players = new ArrayList<Player>();
+
+        for (Player player : onlinePlayers) {
+            if (player.hasPermission(getPermission())) {
+                players.add(player);
+            }
+        }
+
+        return players;
+    }
+
     public String getPermission() {
-        return "surredstone.villages" + getAbbreviation().toLowerCase();
+        return "surredstone.village" + getAbbreviation().toLowerCase();
     }
 
     public int getId() {
