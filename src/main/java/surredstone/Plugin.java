@@ -3,6 +3,7 @@ package surredstone;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import surredstone.commands.Global;
 import surredstone.events.PlayerChat;
 
 public class Plugin extends JavaPlugin {
@@ -18,6 +19,8 @@ public class Plugin extends JavaPlugin {
         saveResource("villages.yml", false);
 
         getServer().getPluginManager().registerEvents(new PlayerChat(), getInstance());
+
+        getCommand("global").setExecutor(new Global());
 
         getServer().getConsoleSender().sendMessage(ON_ENABLE_LOG);
     }
