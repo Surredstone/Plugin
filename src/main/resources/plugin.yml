@@ -4,3 +4,8 @@ description: @description@
 api-version: 1.18
 author: Panem
 main: surredstone.Plugin
+commands:
+  global:
+    aliases: [g]
+    description: Manda uma mensagem para todos no servidor
+    permission: surredstone.global
