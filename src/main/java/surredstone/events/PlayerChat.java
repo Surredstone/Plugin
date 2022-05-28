@@ -1,7 +1,5 @@
 package surredstone.events;
 
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,20 +13,16 @@ public class PlayerChat implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         event.setCancelled(true);
 
-        List<Village> villages = Village.getAllVillages();
+        Village playerVillage = Village.getVillageByPlayer(event.getPlayer());
 
-        for (Village village : villages) {
-            if (event.getPlayer().hasPermission(village.getPermission())) {
-                for (Player player : village.getOnlinePlayers()) {
-                    player.sendMessage(String.format(
-                            "%s[%s] %s<%s> %s",
-                            village.getColor(),
-                            village.getAbbreviation(),
-                            ChatColor.WHITE,
-                            player.getName(),
-                            event.getMessage()));
-                }
-            }
+        for (Player player : playerVillage.getOnlinePlayers()) {
+            player.sendMessage(String.format(
+                "%s[%s] %s<%s> %s",
+                playerVillage.getColor(),
+                playerVillage.getAbbreviation(),
+                ChatColor.WHITE,
+                player.getName(),
+                event.getMessage()));
         }
     }
 }

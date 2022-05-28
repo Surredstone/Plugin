@@ -72,6 +72,16 @@ public class Village {
         return villages.stream().filter(village -> village.id == id).findFirst().orElse(null);
     }
 
+    static public Village getVillageByPlayer(Player player) {
+        for (Village village : getAllVillages()) {
+            if (player.hasPermission(village.getPermission())) {
+                return village;
+            }
+        }
+        
+        return null;
+    }
+
     public List<Player> getOnlinePlayers() {
         Collection<? extends Player> onlinePlayers = Plugin.getInstance().getServer().getOnlinePlayers();
 
