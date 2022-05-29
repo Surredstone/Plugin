@@ -15,7 +15,7 @@ public class Village {
     String color;
     String flag;
 
-    static private List<Village> villages;
+    static private List<Village> villages = new ArrayList<Village>();
 
     private Village(
             final int id,
@@ -28,20 +28,18 @@ public class Village {
 
         this.id = id;
         this.name = name;
-        this.abbreviation = abbreviation;
+        this.abbreviation = abbreviation.toLowerCase();
         this.color = color;
         this.flag = flag;
     }
 
     static private YamlConfiguration getVillageStorage() {
-        return YamlConfiguration.loadConfiguration(new File(Plugin.getInstance().getDataFolder() + "villages.yml"));
+        return YamlConfiguration.loadConfiguration(new File(Plugin.getInstance().getDataFolder() + "/villages.yml"));
     }
 
     static public List<Village> getAllVillages() {
-        if (villages == null) {
+        if (villages.size() == 0) {
             YamlConfiguration villageStorage = getVillageStorage();
-
-            villages = new ArrayList<Village>();
 
             for (int i = 0; i < villageStorage.getKeys(false).size(); i++) {
                 String idStringfied = String.valueOf(i);
@@ -61,7 +59,7 @@ public class Village {
     static public Village getVillageByAbbreviation(String abbreviation) {
         List<Village> villages = getAllVillages();
 
-        return villages.stream().filter(village -> village.abbreviation == abbreviation).findFirst().orElse(null);
+        return villages.stream().filter(village -> village.abbreviation.toLowerCase() == abbreviation.toLowerCase()).findFirst().orElse(null);
     }
 
     static public Village getVillageById(int id) {
@@ -95,7 +93,7 @@ public class Village {
     }
 
     public String getPermission() {
-        return "surredstone.village" + getAbbreviation().toLowerCase();
+        return "surredstone.village." + getAbbreviation();
     }
 
     public int getId() {
@@ -107,7 +105,7 @@ public class Village {
     }
 
     public String getAbbreviation() {
-        return abbreviation;
+        return abbreviation.toLowerCase();
     }
 
     public String getColor() {
