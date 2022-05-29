@@ -57,15 +57,21 @@ public class Village {
     }
 
     static public Village getVillageByAbbreviation(String abbreviation) {
-        List<Village> villages = getAllVillages();
-
-        return villages.stream().filter(village -> village.abbreviation.toLowerCase() == abbreviation.toLowerCase()).findFirst().orElse(null);
+        return getAllVillages()
+                .stream()
+                .filter(village -> village.getAbbreviation() == abbreviation.toLowerCase())
+                .findFirst()
+                .orElse(null);
     }
 
     static public Village getVillageById(int id) {
         List<Village> villages = getAllVillages();
 
-        return villages.stream().filter(village -> village.id == id).findFirst().orElse(null);
+        return villages
+                .stream()
+                .filter(village -> village.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 
     static public Village getVillageByPlayer(Player player) {
@@ -93,7 +99,7 @@ public class Village {
     }
 
     public String getPermission() {
-        return "surredstone.village." + getAbbreviation();
+        return "surredstone.villages." + getAbbreviation();
     }
 
     public int getId() {

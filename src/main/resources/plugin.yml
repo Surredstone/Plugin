@@ -12,6 +12,7 @@ commands:
   village:
     aliases: [vil]
     description: Gerencia uma vila
+    permission: surredstone.village
 permissions:
   surredstone.*:
     default: false
@@ -19,9 +20,15 @@ permissions:
   surredstone.global: 
     default: true
     description: Executar o comando /global
+  surredstone.village:
+    default: true
+    description: Executar o comando /village
   surredstone.village.*:
     default: false
     description: Executar todos os subcomandos do comando /village
   surredstone.village.info:
     default: true
     description: Executar o subcomando /village info
+  surredstone.villages.*:
+    default: false
+    description: Permissões das vilas
