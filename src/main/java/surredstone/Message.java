@@ -8,7 +8,7 @@ public interface Message {
     public String INVALID_VILLAGE_STORAGE_ERROR = "Invalid Village Storage";
     public String COMMAND_MUST_BE_EXECUTED_BY_PLAYER = "This command must be executed by a player";
     public String PLAYER_WITHOUT_VILLAGE = "To run this command you must be in a Village";
-    public String PERMISSIONS_INSUFIENTS = "Permissions insuficients";
+    public String PERMISSIONS_INSUFICIENTS = "Permissions insuficients";
     public String VILLAGE_NOT_FOUND = "Village not found";
     public String SUBCOMMAND_INVALID = "Subcommand invalid";
 }
