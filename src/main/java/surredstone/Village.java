@@ -57,21 +57,23 @@ public class Village {
     }
 
     static public Village getVillageByAbbreviation(String abbreviation) {
-        return getAllVillages()
-                .stream()
-                .filter(village -> village.getAbbreviation() == abbreviation.toLowerCase())
-                .findFirst()
-                .orElse(null);
+        for (Village village : getAllVillages()) {
+            if (village.getAbbreviation().equalsIgnoreCase(abbreviation)) {
+                return village;
+            }
+        }
+
+        return null;
     }
 
     static public Village getVillageById(int id) {
-        List<Village> villages = getAllVillages();
+        for (Village village : getAllVillages()) {
+            if (village.getId() == id) {
+                return village;
+            }
+        }
 
-        return villages
-                .stream()
-                .filter(village -> village.getId() == id)
-                .findFirst()
-                .orElse(null);
+        return null;
     }
 
     static public Village getVillageByPlayer(Player player) {
