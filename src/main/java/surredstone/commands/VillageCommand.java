@@ -10,8 +10,8 @@ import surredstone.Village;
 public class VillageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.hasPermission("surredstone.village")){
-            sender.sendMessage(Message.PERMISSIONS_INSUFIENTS);
+        if (!sender.hasPermission("surredstone.village")) {
+            sender.sendMessage(Message.PERMISSIONS_INSUFICIENTS);
             return false;
         }
 
@@ -22,13 +22,12 @@ public class VillageCommand implements CommandExecutor {
             return false;
         }
 
-        String subcommand = args[1];
-
-        if (subcommand == "info")
-            return new VillageInfoSubcommand().onCommand(sender, command, label, args);
-        else {
-            sender.sendMessage(Message.SUBCOMMAND_INVALID);
-            return false;
+        switch (args[1].toLowerCase()) {
+            case "info":
+                return new VillageInfoSubcommand().setVillage(requestedVillage).onCommand(sender, command, label, args);
+            default:
+                sender.sendMessage(Message.SUBCOMMAND_INVALID);
+                return false;
         }
     }
 }
