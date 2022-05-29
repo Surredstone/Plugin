@@ -20,18 +20,28 @@ public class VillageInfoSubcommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        List<Village> villages = new ArrayList<Village>();
+
+        if (village == null) {
+            villages.addAll(Village.getAllVillages());
+        } else {
+            villages.add(village);
+        }
+
         List<String> message = new ArrayList<String>();
 
-        message.add(String.format(
-                "%s[%s] %s",
-                village.getTextColor(),
-                village.getAbbreviation(),
-                village.getName()));
+        for (Village village : villages) {
+            message.add(String.format(
+                    "%s[%s] %s",
+                    village.getTextColor(),
+                    village.getAbbreviation().toUpperCase(),
+                    village.getName()));
 
-        message.add(String.format(
-                "%sBandeira: %s",
-                ChatColor.AQUA,
-                village.getFlag()));
+            message.add(String.format(
+                    "%sBandeira: %s",
+                    ChatColor.AQUA,
+                    village.getFlag()));
+        }
 
         for (String line : message) {
             sender.sendMessage(line);
