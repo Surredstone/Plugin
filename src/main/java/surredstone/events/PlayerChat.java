@@ -21,7 +21,7 @@ public class PlayerChat implements Listener {
             player.sendMessage(String.format(
                 "%s[%s] %s<%s> %s",
                 playerVillage.getColor(),
-                playerVillage.getAbbreviation(),
+                playerVillage.getAbbreviation().toUpperCase(),
                 ChatColor.WHITE,
                 player.getName(),
                 event.getMessage()));
