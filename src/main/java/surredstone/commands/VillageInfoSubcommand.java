@@ -24,7 +24,7 @@ public class VillageInfoSubcommand implements CommandExecutor {
 
         message.add(String.format(
                 "%s[%s] %s",
-                village.getColor(),
+                village.getTextColor(),
                 village.getAbbreviation(),
                 village.getName()));
 

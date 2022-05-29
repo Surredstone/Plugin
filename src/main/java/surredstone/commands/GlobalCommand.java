@@ -27,7 +27,7 @@ public class GlobalCommand implements CommandExecutor {
 
         Plugin.getInstance().getServer().broadcastMessage(
                 String.format("%s[%s] %s<%s> %s",
-                        playerVillage.getColor(),
+                        playerVillage.getTextColor(),
                         playerVillage.getName(),
                         ChatColor.WHITE,
                         sender.getName(),

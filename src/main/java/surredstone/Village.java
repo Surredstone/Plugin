@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -116,8 +117,18 @@ public class Village {
         return abbreviation.toLowerCase();
     }
 
-    public String getColor() {
+    public String getColorName() {
         return color;
+    }
+
+    public ChatColor getTextColor() {
+        for (ChatColor c : ChatColor.class.getEnumConstants()) {
+            if (c.name().equalsIgnoreCase(getColorName())) {
+                return c;
+            }
+        }
+
+        return null;
     }
 
     public String getFlag() {
