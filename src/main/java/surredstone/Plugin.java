@@ -2,7 +2,8 @@ package surredstone;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import surredstone.commands.Global;
+import surredstone.commands.GlobalCommand;
+import surredstone.commands.VillageCommand;
 import surredstone.events.PlayerChat;
 
 public class Plugin extends JavaPlugin {
@@ -16,7 +17,8 @@ public class Plugin extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PlayerChat(), getInstance());
 
-        getCommand("global").setExecutor(new Global());
+        getCommand("global").setExecutor(new GlobalCommand());
+        getCommand("village").setExecutor(new VillageCommand());
 
         getServer().getConsoleSender().sendMessage(Message.ON_PLUGIN_ENABLE);
     }

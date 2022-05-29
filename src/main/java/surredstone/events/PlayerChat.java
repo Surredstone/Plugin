@@ -20,8 +20,8 @@ public class PlayerChat implements Listener {
         for (Player player : playerVillage.getOnlinePlayers()) {
             player.sendMessage(String.format(
                 "%s[%s] %s<%s> %s",
-                playerVillage.getColor(),
-                playerVillage.getAbbreviation(),
+                playerVillage.getTextColor(),
+                playerVillage.getAbbreviation().toUpperCase(),
                 ChatColor.WHITE,
                 player.getName(),
                 event.getMessage()));
