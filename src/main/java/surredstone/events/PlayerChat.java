@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import surredstone.Message;
 import surredstone.Village;
 
 public class PlayerChat implements Listener {
@@ -17,15 +18,7 @@ public class PlayerChat implements Listener {
             return;
         }
 
-        for (Player player : playerVillage.getOnlinePlayers()) {
-            player.sendMessage(String.format(
-                "%s[%s] %s<%s> %s",
-                playerVillage.getTextColor(),
-                playerVillage.getAbbreviation().toUpperCase(),
-                ChatColor.WHITE,
-                player.getName(),
-                event.getMessage()));
-        }
+        new Message(event.getPlayer().getName(), event.getMessage(), false).sendVillageMessage(playerVillage);
 
         event.setCancelled(true);
     }

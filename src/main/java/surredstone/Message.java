@@ -24,7 +24,7 @@ public class Message {
     private boolean fromDiscord;
     private Player player;
 
-    Message(String name, String message, boolean fromDiscord) {
+    public Message(String name, String message, boolean fromDiscord) {
         this.name = name;
         this.message = message;
 
