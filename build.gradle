@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     implementation "com.google.guava:guava:30.1.1-jre"
+    implementation "net.dv8tion:JDA:VERSION"
     compileOnly "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
 }
 
