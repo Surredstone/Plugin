@@ -6,8 +6,10 @@ Plugin for managing groups of players using Villages
 
 ## Commands
 **/global or /g**: Sends a message to everyone in the server, ignoring the player village.
+
 **/village or /vil**: Manages the villages.
-- **/village info [village-abbreviation]**: Get the abbreviation, name and flag from a village or every village.
+
+**/village info [village-abbreviation]**: Get the abbreviation, name and flag from a village or every village.
 
 ## Settings
 To edit the plugin villages, open the file ``villages.yml`` and follow the pattern.
