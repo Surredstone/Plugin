@@ -17,6 +17,7 @@ public class Message {
     public static String SUBCOMMAND_INVALID = "Subcomando inválido";
     public static String DISCORD = ChatColor.AQUA + "[DC]";
     public static String GLOBAL = ChatColor.GOLD + "Global";
+    public static String VILLAGE = ChatColor.GOLD + "Vila";
 
     private String name;
     private String message;
@@ -44,6 +45,16 @@ public class Message {
         return playerVillage.getTextColor() + playerVillage.getName();
     }
 
+    private String getPlayerAbbreviationVillagePrefix() {
+        if (player == null) {
+            return "";
+        }
+
+        Village playerVillage = Village.getVillageByPlayer(player);
+
+        return playerVillage.getTextColor() + playerVillage.getAbbreviation();
+    }
+
     private String getPlayerName() {
         return ChatColor.WHITE + name + ":";
     }
@@ -54,6 +65,12 @@ public class Message {
 
     private void sendMessageToEveryone(String message) {
         for (Player player : Plugin.getInstance().getServer().getOnlinePlayers()) {
+            player.sendMessage(message);
+        }
+    }
+
+    private void sendMessageToVillage(Village village, String message) {
+        for (Player player : village.getOnlinePlayers()) {
             player.sendMessage(message);
         }
     }
@@ -75,4 +92,20 @@ public class Message {
         return finalMessage;
     }
 
+    public String sendVillageMessage(Village village) {
+        List<String> splittedMessage = new ArrayList<String>();
+
+        splittedMessage.add(getDiscordNotation());
+        splittedMessage.add(VILLAGE);
+        splittedMessage.add(getPlayerAbbreviationVillagePrefix());
+        splittedMessage.add(getPlayerName());
+        splittedMessage.add(message);
+
+        String finalMessage = String.join(" ", splittedMessage);
+
+        consoleLogMessage(finalMessage);
+        sendMessageToVillage(village, finalMessage);
+
+        return finalMessage;
+    }
 }
