@@ -1,28 +1,74 @@
 plugins {
-    id "application"
+    id 'java'
+    id 'dev.ethp.bukkit' version '0.2.3'
 }
 
 repositories {
-    mavenCentral()
-    maven {
-        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
-    }
+    maven { url "https://m2.dv8tion.net/releases" }
 }
 
 dependencies {
-    implementation "com.google.guava:guava:30.1.1-jre"
-    implementation "net.dv8tion:JDA:VERSION"
-    compileOnly "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
+    spigotApi()
+    implementation ("net.dv8tion:JDA:5.0.0-alpha.12") {
+        exclude module: 'opus-java'
+    }
 }
 
-task copyFiles(type: Copy) {
-    from "src/main/resources/plugin.yml"
-    into ("$buildDir/resources/main")
-    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
-        name: project.name,
-        description: project.description,
-        version: project.version
-    ])
+group 'surredstone'
+version = project.getVersion()
+
+bukkit {
+    name project.getName()
+    version project.getVersion()
+    description project.getDescription()
+    author 'Panem'
+    main 'surredstone.Plugin'
+
+    api {
+        version '1.18.1'
+    }
+
+    command 'global', {
+        alias 'g'
+        permission 'surredstone.global'
+        description 'Envia uma mensagem para todos.'
+    }
+
+    command 'village', {
+        alias 'vil'
+        description 'Gerencia uma vila.'
+        permission 'surredstone.village'
+    }
+
+    permission 'surredstone.*', {
+        description 'Todas as permissões do plugin.'
+        allow NONE
+    }
+
+    permission 'surredstone.global', {
+        description 'Executar o comando /global.'
+        allow ALL
+    }
+
+    permission 'surredstone.village', {
+        description 'Executar o comando /village.'
+        allow ALL
+    }
+
+    permission 'surredstone.village.*', {
+        description 'Executar todos os subcomando do comando /village.'
+        allow OPERATOR
+    }
+
+    permission 'surredstone.village.info', {
+        description 'Executar o subcomando /village info.'
+        allow ALL
+    }
+
+    permission 'surredstone.villages.*', {
+        description 'Permissões das vilas.' 
+        allow OPERATOR
+    }
 }
 
 task copyPluginJar(type: Copy) {
@@ -31,7 +77,7 @@ task copyPluginJar(type: Copy) {
 }
 
 jar {
-    dependsOn copyFiles
+    dependsOn generateBukkitManifest
     finalizedBy copyPluginJar
     archiveFileName = "Surredstone.jar"
 }
