@@ -1,36 +1,48 @@
 plugins {
-    id "application"
+    id "java"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    maven { url "https://m2.dv8tion.net/releases" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+}
+
+
+dependencies {
+    implementation "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
+    implementation ("net.dv8tion:JDA:5.0.0-alpha.12") {
+        exclude module: "opus-java"
     }
 }
 
-dependencies {
-    implementation "com.google.guava:guava:30.1.1-jre"
-    compileOnly "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
-}
+group findProperty("group")
+version = findProperty("version")
 
-task copyFiles(type: Copy) {
+task generatePluginMeta(type: Copy) {
     from "src/main/resources/plugin.yml"
-    into ("$buildDir/resources/main")
+    into "$buildDir/resources/main"
     filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
-        name: project.name,
-        description: project.description,
-        version: project.version
+        name: findProperty("name"),
+        version: "'" + findProperty("version") + "'",
+        description: findProperty("description"),
+        apiVersion: "'" + findProperty("apiVersion") + "'",
+        author: findProperty("author"),
+        main: findProperty("main")
     ])
 }
 
 task copyPluginJar(type: Copy) {
-    from ("$buildDir/libs/Surredstone.jar")
+    from "$buildDir/libs/Surredstone.jar"
     into "server/plugins"
 }
 
-jar {
-    dependsOn copyFiles
+shadowJar {
+    dependsOn generatePluginMeta
     finalizedBy copyPluginJar
-    archiveFileName = "Surredstone.jar"
+
+    archiveBaseName.set 'Surredstone'
+    archiveClassifier.set ''
+    archiveVersion.set ''
 }

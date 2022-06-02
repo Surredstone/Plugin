@@ -1,14 +1,11 @@
 package surredstone.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import surredstone.Message;
-import surredstone.Plugin;
-import surredstone.Village;
 
 public class GlobalCommand implements CommandExecutor {
     @Override
@@ -18,20 +15,7 @@ public class GlobalCommand implements CommandExecutor {
             return false;
         }
 
-        Village playerVillage = Village.getVillageByPlayer((Player) sender);
-
-        if (playerVillage == null) {
-            sender.sendMessage(Message.PLAYER_WITHOUT_VILLAGE);
-            return false;
-        }
-
-        Plugin.getInstance().getServer().broadcastMessage(
-                String.format("%s[%s] %s<%s> %s",
-                        playerVillage.getTextColor(),
-                        playerVillage.getName(),
-                        ChatColor.WHITE,
-                        sender.getName(),
-                        args));
+        new Message(sender.getName(), args.toString(), false).sendGlobalMessage();
 
         return true;
     }

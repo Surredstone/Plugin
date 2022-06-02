@@ -1,9 +1,9 @@
 name: @name@
 version: @version@
 description: @description@
-api-version: 1.18
-author: Panem
-main: surredstone.Plugin
+api-version: @apiVersion@
+author: @author@
+main: @main@
 commands:
   global:
     aliases: [g]
@@ -15,7 +15,7 @@ commands:
     permission: surredstone.village
 permissions:
   surredstone.*:
-    default: false
+    default: op
     description: Todas as permissões do plugin
   surredstone.global: 
     default: true
@@ -24,11 +24,11 @@ permissions:
     default: true
     description: Executar o comando /village
   surredstone.village.*:
-    default: false
+    default: op
     description: Executar todos os subcomandos do comando /village
   surredstone.village.info:
     default: true
     description: Executar o subcomando /village info
   surredstone.villages.*:
-    default: false
+    default: op
     description: Permissões das vilas
