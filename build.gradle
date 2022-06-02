@@ -1,83 +1,48 @@
 plugins {
-    id 'java'
-    id 'dev.ethp.bukkit' version '0.2.3'
+    id "java"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 repositories {
+    mavenCentral()
     maven { url "https://m2.dv8tion.net/releases" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
 }
+
 
 dependencies {
-    spigotApi()
+    implementation "org.spigotmc:spigot-api:${apiVersion}-R0.1-SNAPSHOT"
     implementation ("net.dv8tion:JDA:5.0.0-alpha.12") {
-        exclude module: 'opus-java'
+        exclude module: "opus-java"
     }
 }
 
-group 'surredstone'
-version = project.getVersion()
+group findProperty("group")
+version = findProperty("version")
 
-bukkit {
-    name project.getName()
-    version project.getVersion()
-    description project.getDescription()
-    author 'Panem'
-    main 'surredstone.Plugin'
-
-    api {
-        version '1.18.1'
-    }
-
-    command 'global', {
-        alias 'g'
-        permission 'surredstone.global'
-        description 'Envia uma mensagem para todos.'
-    }
-
-    command 'village', {
-        alias 'vil'
-        description 'Gerencia uma vila.'
-        permission 'surredstone.village'
-    }
-
-    permission 'surredstone.*', {
-        description 'Todas as permissões do plugin.'
-        allow NONE
-    }
-
-    permission 'surredstone.global', {
-        description 'Executar o comando /global.'
-        allow ALL
-    }
-
-    permission 'surredstone.village', {
-        description 'Executar o comando /village.'
-        allow ALL
-    }
-
-    permission 'surredstone.village.*', {
-        description 'Executar todos os subcomando do comando /village.'
-        allow OPERATOR
-    }
-
-    permission 'surredstone.village.info', {
-        description 'Executar o subcomando /village info.'
-        allow ALL
-    }
-
-    permission 'surredstone.villages.*', {
-        description 'Permissões das vilas.' 
-        allow OPERATOR
-    }
+task generatePluginMeta(type: Copy) {
+    from "src/main/resources/plugin.yml"
+    into "$buildDir/resources/main"
+    filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: [
+        name: findProperty("name"),
+        version: "'" + findProperty("version") + "'",
+        description: findProperty("description"),
+        apiVersion: "'" + findProperty("apiVersion") + "'",
+        author: findProperty("author"),
+        main: findProperty("main")
+    ])
 }
 
 task copyPluginJar(type: Copy) {
-    from ("$buildDir/libs/Surredstone.jar")
+    from "$buildDir/libs/Surredstone.jar"
     into "server/plugins"
 }
 
-jar {
-    dependsOn generateBukkitManifest
+shadowJar {
+    dependsOn generatePluginMeta
     finalizedBy copyPluginJar
-    archiveFileName = "Surredstone.jar"
+
+    archiveBaseName.set 'Surredstone'
+    archiveClassifier.set ''
+    archiveVersion.set ''
 }
