@@ -14,7 +14,7 @@ public class Village {
     String name;
     String abbreviation;
     String color;
-    String flag;
+    String info;
 
     static private List<Village> villages = new ArrayList<Village>();
 
@@ -23,7 +23,7 @@ public class Village {
             String name,
             String abbreviation,
             String color,
-            String flag) {
+            String info) {
         if (abbreviation.contains(" ") || abbreviation.contains("   "))
             throw new Error(Message.INVALID_VILLAGE_STORAGE_ERROR);
 
@@ -31,7 +31,7 @@ public class Village {
         this.name = name;
         this.abbreviation = abbreviation.toLowerCase();
         this.color = color;
-        this.flag = flag;
+        this.info = info;
     }
 
     static private YamlConfiguration getVillageStorage() {
@@ -50,7 +50,7 @@ public class Village {
                         villageStorage.getString(idStringfied + ".name"),
                         villageStorage.getString(idStringfied + ".abbreviation"),
                         villageStorage.getString(idStringfied + ".color"),
-                        villageStorage.getString(idStringfied + ".flag")));
+                        villageStorage.getString(idStringfied + ".info")));
             }
         }
 
@@ -131,7 +131,7 @@ public class Village {
         return null;
     }
 
-    public String getFlag() {
-        return flag;
+    public String getInfo() {
+        return info;
     }
 }
