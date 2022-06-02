@@ -2,7 +2,6 @@ package surredstone;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import net.dv8tion.jda.api.JDA;
 import surredstone.commands.GlobalCommand;
 import surredstone.commands.VillageCommand;
 import surredstone.events.PlayerChat;

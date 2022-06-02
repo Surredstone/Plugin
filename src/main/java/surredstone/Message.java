@@ -18,7 +18,8 @@ public class Message {
     public static String DISCORD = ChatColor.AQUA + "[DC]";
     public static String GLOBAL = ChatColor.GOLD + "Global";
     public static String VILLAGE = ChatColor.GOLD + "Vila";
-    public static String BOT_LOGIN_FAILURE = ChatColor.RED + "Failed to connect to Discord";
+    public static String BOT_LOGIN_FAILURE = ChatColor.RED + "Falha ao conectar ao Discord";
+    public static String BOT_LOGIN_SUCCESS = ChatColor.GREEN + "Bot connectado como %s";
 
     private String name;
     private String message;
