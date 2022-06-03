@@ -27,7 +27,7 @@ public class Village {
             String info,
             String discordChannel) {
         if (abbreviation.contains(" ") || abbreviation.contains("   "))
-            throw new Error(Message.INVALID_VILLAGE_STORAGE_ERROR);
+            throw new Error(MessageLine.INVALID_VILLAGE_STORAGE);
 
         this.id = id;
         this.name = name;

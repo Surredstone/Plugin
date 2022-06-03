@@ -52,6 +52,8 @@ public class Bot {
     }
 
     public void sendMessageToVillage(Village village, String message) {
+        Plugin.getInstance().getLogger().info(village.getDiscordChannelId());
+
         bot.getTextChannelById(village.getDiscordChannelId())
                 .sendMessage(ChatColor.stripColor(message));
     }

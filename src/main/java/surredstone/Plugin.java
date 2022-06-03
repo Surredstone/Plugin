@@ -28,13 +28,13 @@ public class Plugin extends JavaPlugin {
 
         createBot(getConfig().getString("discord.token"));
 
-        getServer().getConsoleSender().sendMessage(Message.ON_PLUGIN_ENABLE);
+        getServer().getConsoleSender().sendMessage(MessageLine.PLUGIN_ENABLE);
     }
 
     @Override
     public void onDisable() {
         Bot.getInstance().stop();
-        getServer().getConsoleSender().sendMessage(Message.ON_PLUGIN_DISABLE);
+        getServer().getConsoleSender().sendMessage(MessageLine.PLUGIN_DISABLE);
     }
 
     public static Plugin getInstance() {
@@ -47,8 +47,7 @@ public class Plugin extends JavaPlugin {
     }
 
     public String getOnlinePlayersString() {
-        return String.valueOf(
-                getServer().getOnlinePlayers().size())
+        return String.valueOf(getServer().getOnlinePlayers().size())
                 + "/" +
                 String.valueOf(getServer().getMaxPlayers());
     }
