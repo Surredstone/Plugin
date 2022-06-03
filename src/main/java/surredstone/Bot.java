@@ -2,6 +2,8 @@ package surredstone;
 
 import javax.security.auth.login.LoginException;
 
+import org.bukkit.ChatColor;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -31,10 +33,6 @@ public class Bot {
         }
     }
 
-    public void setPresence(String text) {
-        bot.getPresence().setActivity(Activity.playing("Surredstone - " + text));
-    }
-
     public static Bot getInstance(String token) {
         if (_instance == null)
             _instance = new Bot(token);
@@ -43,5 +41,19 @@ public class Bot {
 
     public static Bot getInstance() {
         return _instance;
+    }
+
+    public void setPresence(String text) {
+        bot.getPresence().setActivity(Activity.playing("Surredstone - " + text));
+    }
+
+    public void sendMessageToVillage(Village village, String message) {
+        bot.getTextChannelById(village.getDiscordChannelId())
+                .sendMessage(ChatColor.stripColor(message));
+    }
+
+    public void sendMessageToMainChannel(String message) {
+        bot.getTextChannelById(Plugin.getInstance().getDiscordMainChannelId())
+                .sendMessage(ChatColor.stripColor(message));
     }
 }
