@@ -11,6 +11,11 @@ import surredstone.Village;
 public class VillageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (args.length == 0) {
+            sender.sendMessage(Message.PARAM_INSUFICIENTS);
+            return false;
+        }
+
         String subcommand = args[0].toLowerCase();
         Village requestedVillage = (args.length <= 1) ? null : Village.getVillageByAbbreviation(args[1]);
 
