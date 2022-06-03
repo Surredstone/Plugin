@@ -51,4 +51,8 @@ public class Plugin extends JavaPlugin {
             + "/" +
             String.valueOf(getServer().getMaxPlayers());
     }
+
+    public String getDiscordMainChannelId() {
+        return getConfig().getString("discord.main");
+    }
 }

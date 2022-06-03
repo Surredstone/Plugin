@@ -15,6 +15,7 @@ public class Village {
     String abbreviation;
     String color;
     String info;
+    String discord;
 
     static private List<Village> villages = new ArrayList<Village>();
 
@@ -23,7 +24,8 @@ public class Village {
             String name,
             String abbreviation,
             String color,
-            String info) {
+            String info,
+            String discordChannel) {
         if (abbreviation.contains(" ") || abbreviation.contains("   "))
             throw new Error(Message.INVALID_VILLAGE_STORAGE_ERROR);
 
@@ -32,6 +34,7 @@ public class Village {
         this.abbreviation = abbreviation.toLowerCase();
         this.color = color;
         this.info = info;
+        this.discord = discordChannel;
     }
 
     static private YamlConfiguration getVillageStorage() {
@@ -50,7 +53,8 @@ public class Village {
                         villageStorage.getString(idStringfied + ".name"),
                         villageStorage.getString(idStringfied + ".abbreviation"),
                         villageStorage.getString(idStringfied + ".color"),
-                        villageStorage.getString(idStringfied + ".info")));
+                        villageStorage.getString(idStringfied + ".info"),
+                        villageStorage.getString(idStringfied + ".discord")));
             }
         }
 
@@ -133,5 +137,9 @@ public class Village {
 
     public String getInfo() {
         return info;
+    }
+
+    public String getDiscordChannelId() {
+        return discord;
     }
 }
