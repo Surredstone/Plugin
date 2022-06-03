@@ -20,6 +20,8 @@ public class VillageCommand implements CommandExecutor {
         switch (subcommand) {
             case "info":
                 return new VillageInfoSubcommand().setVillage(requestedVillage).onCommand(sender, command, label, args);
+            case "chat":
+                return new VillageChatSubcommand().setVillage(requestedVillage).onCommand(sender, command, label, args);
             default:
                 sender.sendMessage(Message.SUBCOMMAND_INVALID);
                 return false;
