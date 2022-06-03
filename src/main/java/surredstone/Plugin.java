@@ -4,7 +4,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import surredstone.commands.GlobalCommand;
 import surredstone.commands.VillageCommand;
-import surredstone.events.PlayerChat;
+import surredstone.events.PlayerChatListener;
+import surredstone.events.PlayerJoinListener;
+import surredstone.events.PlayerQuitListener;
 
 public class Plugin extends JavaPlugin {
     static Plugin _instance;
@@ -17,7 +19,9 @@ public class Plugin extends JavaPlugin {
         saveDefaultConfig();
         saveResource("villages.yml", false);
 
-        getServer().getPluginManager().registerEvents(new PlayerChat(), getInstance());
+        getServer().getPluginManager().registerEvents(new PlayerChatListener(), getInstance());
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getInstance());
+        getServer().getPluginManager().registerEvents(new PlayerQuitListener(), getInstance());
 
         getCommand("global").setExecutor(new GlobalCommand());
         getCommand("village").setExecutor(new VillageCommand());
@@ -37,7 +41,14 @@ public class Plugin extends JavaPlugin {
     }
 
     public Bot createBot(String token) {
-        this.bot = new Bot(token);
+        this.bot = Bot.getInstance(token);
         return this.bot;
+    }
+
+    public String getOnlinePlayersString() {
+        return String.valueOf(
+            getServer().getOnlinePlayers().size())
+            + "/" +
+            String.valueOf(getServer().getMaxPlayers());
     }
 }

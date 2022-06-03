@@ -7,7 +7,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import surredstone.Message;
 import surredstone.Village;
 
-public class PlayerChat implements Listener {
+public class PlayerChatListener implements Listener {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Village playerVillage = Village.getVillageByPlayer(event.getPlayer());
