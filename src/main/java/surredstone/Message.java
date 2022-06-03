@@ -32,7 +32,7 @@ public class Message {
                 senderVillage.getTextColor(),
                 (infoType == "name")
                         ? senderVillage.getName()
-                        : senderVillage.getAbbreviation());
+                        : senderVillage.getAbbreviation().toUpperCase());
     }
 
     public String generateMessage() {
@@ -58,7 +58,7 @@ public class Message {
                 ? senderVillage.getTextColor()
                 : "") + senderName + ":");
 
-        components.add(message);
+        components.add(ChatColor.WHITE + message);
 
         components.removeIf(component -> (component == null));
 
