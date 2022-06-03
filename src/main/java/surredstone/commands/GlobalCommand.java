@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import surredstone.Message;
 import surredstone.MessageLine;
+import surredstone.MessageType;
+import surredstone.Sender;
 
 public class GlobalCommand implements CommandExecutor {
     @Override
@@ -16,7 +18,12 @@ public class GlobalCommand implements CommandExecutor {
             return false;
         }
 
-        new Message(sender.getName(), String.join(" ", args), false).sendGlobalMessage();
+        Sender.sendGlobalMessage(
+                new Message(
+                        sender.getName(),
+                        String.join(" ", args),
+                        false,
+                        MessageType.GLOBAL));
 
         return true;
     }

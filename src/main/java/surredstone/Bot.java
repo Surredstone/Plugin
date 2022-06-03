@@ -2,8 +2,6 @@ package surredstone;
 
 import javax.security.auth.login.LoginException;
 
-import org.bukkit.ChatColor;
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -29,7 +27,7 @@ public class Bot {
                     .build();
 
         } catch (LoginException e) {
-            Plugin.getInstance().getServer().getConsoleSender().sendMessage(Message.BOT_LOGIN_FAILURE);
+            Plugin.getInstance().getServer().getConsoleSender().sendMessage(MessageLine.BOT_LOGIN_FAILURE);
         }
     }
 
@@ -52,14 +50,12 @@ public class Bot {
     }
 
     public void sendMessageToVillage(Village village, String message) {
-        Plugin.getInstance().getLogger().info(village.getDiscordChannelId());
-
         bot.getTextChannelById(village.getDiscordChannelId())
-                .sendMessage(ChatColor.stripColor(message));
+                .sendMessage(message).complete();
     }
 
     public void sendMessageToMainChannel(String message) {
         bot.getTextChannelById(Plugin.getInstance().getDiscordMainChannelId())
-                .sendMessage(ChatColor.stripColor(message));
+                .sendMessage(message).complete();
     }
 }

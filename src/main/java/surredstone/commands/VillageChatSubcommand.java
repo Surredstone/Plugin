@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import surredstone.Message;
 import surredstone.MessageLine;
+import surredstone.MessageType;
+import surredstone.Sender;
 import surredstone.Village;
 
 public class VillageChatSubcommand implements CommandExecutor {
@@ -39,7 +41,11 @@ public class VillageChatSubcommand implements CommandExecutor {
             return false;
         }
 
-        new Message(sender.getName(), String.join(" ", args), false).sendVillageMessage(village);
+        Sender.sendVillageMessage((Player) sender, village, new Message(
+                sender.getName(),
+                String.join(" ", args),
+                false,
+                MessageType.VILLAGE));
 
         return true;
     }
