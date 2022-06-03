@@ -2,9 +2,9 @@
   name: Village 1
   abbreviation: VL1
   color: RED
-  flag: example.com
+  info: example.com
 "1":
   name: Village 1
   abbreviation: VL2
   color: BLUE
-  flag: example.com
+  info: example.com
