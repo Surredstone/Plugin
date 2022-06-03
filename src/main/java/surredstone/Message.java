@@ -39,7 +39,7 @@ public class Message {
     }
 
     private String getDiscordNotation() {
-        return (fromDiscord) ? DISCORD : "";
+        return (fromDiscord) ? DISCORD : null;
     }
 
     private String getPlayerCompleteVillagePrefix() {
@@ -54,12 +54,12 @@ public class Message {
 
     private String getPlayerAbbreviationVillagePrefix() {
         if (player == null) {
-            return "";
+            return null;
         }
 
         Village playerVillage = Village.getVillageByPlayer(player);
 
-        return playerVillage.getTextColor() + playerVillage.getAbbreviation();
+        return playerVillage.getTextColor() + playerVillage.getAbbreviation().toUpperCase();
     }
 
     private String getPlayerName() {
@@ -91,6 +91,7 @@ public class Message {
         splittedMessage.add(getPlayerName());
         splittedMessage.add(message);
 
+        splittedMessage.removeIf(message -> (message == null));
         String finalMessage = String.join(" ", splittedMessage);
 
         consoleLogMessage(finalMessage);
@@ -108,6 +109,7 @@ public class Message {
         splittedMessage.add(getPlayerName());
         splittedMessage.add(message);
 
+        splittedMessage.removeIf(message -> (message == null));
         String finalMessage = String.join(" ", splittedMessage);
 
         consoleLogMessage(finalMessage);
