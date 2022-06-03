@@ -24,6 +24,7 @@ public class Message {
     public static String BOT_LOGIN_SUCCESS = ChatColor.GREEN + "Bot connectado como %s";
     public static String INFO_INFO = ChatColor.AQUA + "Informações: %s";
     public static String INFO_MEMBERS = ChatColor.AQUA + "Membros online: %s";
+    public static String PARAM_INSUFICIENTS = ChatColor.RED + "Parâmetros insuficientes";
 
     private String name;
     private String message;

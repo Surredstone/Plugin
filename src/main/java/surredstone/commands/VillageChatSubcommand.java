@@ -33,6 +33,11 @@ public class VillageChatSubcommand implements CommandExecutor {
             return false;
         }
 
+        if (String.valueOf(args).isBlank()) {
+            sender.sendMessage(Message.PARAM_INSUFICIENTS);
+            return false;
+        }
+
         new Message(sender.getName(), String.valueOf(args), false).sendVillageMessage(village);
 
         return true;
