@@ -111,6 +111,7 @@ public class Message {
 
         consoleLogMessage(finalMessage);
         sendMessageToVillage(village, finalMessage);
+        Bot.getInstance().sendMessageToVillage(village, finalMessage);
 
         return finalMessage;
     }
