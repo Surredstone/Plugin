@@ -43,6 +43,10 @@ public class Bot {
         return _instance;
     }
 
+    public void stop() {
+        bot.shutdown();
+    }
+
     public void setPresence(String text) {
         bot.getPresence().setActivity(Activity.playing("Surredstone - " + text));
     }

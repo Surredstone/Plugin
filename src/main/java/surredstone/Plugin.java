@@ -33,6 +33,7 @@ public class Plugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bot.getInstance().stop();
         getServer().getConsoleSender().sendMessage(Message.ON_PLUGIN_DISABLE);
     }
 
@@ -47,9 +48,9 @@ public class Plugin extends JavaPlugin {
 
     public String getOnlinePlayersString() {
         return String.valueOf(
-            getServer().getOnlinePlayers().size())
-            + "/" +
-            String.valueOf(getServer().getMaxPlayers());
+                getServer().getOnlinePlayers().size())
+                + "/" +
+                String.valueOf(getServer().getMaxPlayers());
     }
 
     public String getDiscordMainChannelId() {
