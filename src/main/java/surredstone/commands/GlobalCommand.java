@@ -15,7 +15,7 @@ public class GlobalCommand implements CommandExecutor {
             return false;
         }
 
-        new Message(sender.getName(), args.toString(), false).sendGlobalMessage();
+        new Message(sender.getName(), String.join(" ", args), false).sendGlobalMessage();
 
         return true;
     }

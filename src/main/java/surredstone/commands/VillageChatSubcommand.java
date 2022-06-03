@@ -38,7 +38,7 @@ public class VillageChatSubcommand implements CommandExecutor {
             return false;
         }
 
-        new Message(sender.getName(), String.valueOf(args), false).sendVillageMessage(village);
+        new Message(sender.getName(), String.join(" ", args), false).sendVillageMessage(village);
 
         return true;
     }
