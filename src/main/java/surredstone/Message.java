@@ -49,7 +49,7 @@ public class Message {
 
         Village playerVillage = Village.getVillageByPlayer(player);
 
-        return playerVillage.getTextColor() + playerVillage.getName();
+        return playerVillage.getTextColor() + "[" + playerVillage.getName() + "]";
     }
 
     private String getPlayerAbbreviationVillagePrefix() {
@@ -59,7 +59,7 @@ public class Message {
 
         Village playerVillage = Village.getVillageByPlayer(player);
 
-        return playerVillage.getTextColor() + playerVillage.getAbbreviation().toUpperCase();
+        return playerVillage.getTextColor() + "[" + playerVillage.getAbbreviation().toUpperCase() + "]";
     }
 
     private String getPlayerName() {
