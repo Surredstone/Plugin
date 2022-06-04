@@ -12,6 +12,6 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Presence.updatePresence(
                 Presence.getCurrentOnlinePlayersMessage(
-                        Plugin.getInstance().getServer().getOnlinePlayers().size()));
+                        Plugin.getOnlinePlayers().size()));
     }
 }

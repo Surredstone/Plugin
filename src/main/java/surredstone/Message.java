@@ -16,7 +16,7 @@ public class Message {
 
     public Message(String senderName, String message, boolean fromDiscord, MessageType type) {
         this.senderName = senderName;
-        this.senderPlayer = Plugin.getInstance().getServer().getPlayer(senderName);
+        this.senderPlayer = Plugin.getPlayerByName(senderName);
         this.senderVillage = Village.getVillageByPlayer(senderPlayer);
         this.message = message;
         this.fromDiscord = fromDiscord;

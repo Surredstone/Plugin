@@ -9,11 +9,11 @@ import surredstone.Plugin;
 public class ReadyListener extends ListenerAdapter {
     @Override
     public void onReady(ReadyEvent event) {
-        Plugin.getInstance().getServer().getConsoleSender().sendMessage(
-            String.format(
-                MessageLine.BOT_LOGIN_SUCCESS, 
-                event.getJDA().getSelfUser().getName()));
+        Plugin.consoleLog(
+                String.format(
+                        MessageLine.BOT_LOGIN_SUCCESS,
+                        event.getJDA().getSelfUser().getName()));
 
-        Bot.getInstance().sendMessageToMainChannel(MessageLine.DC_SERVER_OPEN);
+        Bot.sendMessageToMainChannel(MessageLine.DC_SERVER_OPEN);
     }
 }

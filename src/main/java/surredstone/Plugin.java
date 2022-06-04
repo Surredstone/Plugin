@@ -1,5 +1,9 @@
 package surredstone;
 
+import java.io.File;
+import java.util.Collection;
+
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import surredstone.commands.GlobalCommand;
@@ -9,7 +13,7 @@ import surredstone.events.PlayerJoinListener;
 import surredstone.events.PlayerQuitListener;
 
 public class Plugin extends JavaPlugin {
-    static Plugin _instance;
+    private static Plugin _instance;
 
     @Override
     public void onEnable() {
@@ -32,15 +36,35 @@ public class Plugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bot.getInstance().stop();
+        Bot.stop();
         getServer().getConsoleSender().sendMessage(MessageLine.PLUGIN_DISABLE);
     }
 
-    public static Plugin getInstance() {
+    private static Plugin getInstance() {
         return _instance;
     }
 
-    public String getDiscordMainChannelId() {
-        return getConfig().getString("discord.main");
+    public static String getDiscordMainChannelId() {
+        return getInstance().getConfig().getString("discord.main");
+    }
+
+    public static void consoleLog(String message) {
+        getInstance().getServer().getConsoleSender().sendMessage(message);
+    }
+
+    public static Player getPlayerByName(String playerName) {
+        return getInstance().getServer().getPlayer(playerName);
+    }
+
+    public static Collection<? extends Player> getOnlinePlayers() {
+        return getInstance().getServer().getOnlinePlayers();
+    }
+
+    public static int getMaxPlayers() {
+        return getInstance().getServer().getMaxPlayers();
+    }
+
+    public static File getDataFolderFile() {
+        return getInstance().getDataFolder();
     }
 }

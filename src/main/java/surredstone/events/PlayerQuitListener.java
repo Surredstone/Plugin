@@ -12,6 +12,6 @@ public class PlayerQuitListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Presence.updatePresence(
                 Presence.getCurrentOnlinePlayersMessage(
-                        Plugin.getInstance().getServer().getOnlinePlayers().size() - 1));
+                        Plugin.getOnlinePlayers().size() - 1));
     }
 }
