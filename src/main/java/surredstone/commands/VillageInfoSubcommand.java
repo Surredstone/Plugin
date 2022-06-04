@@ -8,7 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import surredstone.Message;
+import surredstone.MessageLine;
 import surredstone.Village;
 
 public class VillageInfoSubcommand implements CommandExecutor {
@@ -39,11 +39,11 @@ public class VillageInfoSubcommand implements CommandExecutor {
                     village.getName()));
 
             message.add(String.format(
-                    Message.INFO_MEMBERS,
+                    MessageLine.MEMBERS_LABEL,
                     ChatColor.WHITE + String.valueOf(village.getOnlinePlayers().size())));
 
             message.add(String.format(
-                    Message.INFO_INFO,
+                    MessageLine.INFO_LABEL,
                     ChatColor.WHITE + village.getInfo()));
         }
 

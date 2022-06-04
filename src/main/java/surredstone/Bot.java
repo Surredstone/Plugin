@@ -2,8 +2,6 @@ package surredstone;
 
 import javax.security.auth.login.LoginException;
 
-import org.bukkit.ChatColor;
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -24,12 +22,13 @@ public class Bot {
                             GatewayIntent.GUILD_MESSAGE_TYPING)
                     .addEventListeners(new ReadyListener())
                     .setActivity(Activity.playing(
-                            "Surredstone - "
-                                    + Plugin.getInstance().getOnlinePlayersString()))
+                            Presence.getPresenceMessage(
+                                    Presence.getCurrentOnlinePlayersMessage(
+                                            Plugin.getInstance().getServer().getOnlinePlayers().size()))))
                     .build();
 
         } catch (LoginException e) {
-            Plugin.getInstance().getServer().getConsoleSender().sendMessage(Message.BOT_LOGIN_FAILURE);
+            Plugin.getInstance().getServer().getConsoleSender().sendMessage(MessageLine.BOT_LOGIN_FAILURE);
         }
     }
 
@@ -43,17 +42,21 @@ public class Bot {
         return _instance;
     }
 
-    public void setPresence(String text) {
-        bot.getPresence().setActivity(Activity.playing("Surredstone - " + text));
+    public void stop() {
+        bot.shutdown();
     }
 
     public void sendMessageToVillage(Village village, String message) {
         bot.getTextChannelById(village.getDiscordChannelId())
-                .sendMessage(ChatColor.stripColor(message));
+                .sendMessage(message).complete();
     }
 
     public void sendMessageToMainChannel(String message) {
         bot.getTextChannelById(Plugin.getInstance().getDiscordMainChannelId())
-                .sendMessage(ChatColor.stripColor(message));
+                .sendMessage(message).complete();
+    }
+
+    public void updatePresenceMessage(String message) {
+        bot.getPresence().setActivity(Activity.playing(message));
     }
 }

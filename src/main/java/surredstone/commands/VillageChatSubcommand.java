@@ -6,6 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import surredstone.Message;
+import surredstone.MessageLine;
+import surredstone.MessageType;
+import surredstone.Sender;
 import surredstone.Village;
 
 public class VillageChatSubcommand implements CommandExecutor {
@@ -19,26 +22,30 @@ public class VillageChatSubcommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(Message.COMMAND_MUST_BE_EXECUTED_BY_PLAYER);
+            sender.sendMessage(MessageLine.COMMAND_EXECUTED_PLAYER);
             return false;
         }
 
         if (village == null) {
-            sender.sendMessage(Message.VILLAGE_NOT_FOUND);
+            sender.sendMessage(MessageLine.VILLAGE_NOT_FOUND);
             return false;
         }
 
         if (Village.getVillageByPlayer((Player) sender) == null) {
-            sender.sendMessage(Message.PLAYER_WITHOUT_VILLAGE);
+            sender.sendMessage(MessageLine.PLAYER_VILLAGE_NULL);
             return false;
         }
 
         if (String.valueOf(args).isBlank()) {
-            sender.sendMessage(Message.PARAM_INSUFICIENTS);
+            sender.sendMessage(MessageLine.PARAMETERS_NULL);
             return false;
         }
 
-        new Message(sender.getName(), String.valueOf(args), false).sendVillageMessage(village);
+        Sender.sendVillageMessage((Player) sender, village, new Message(
+                sender.getName(),
+                String.join(" ", args),
+                false,
+                MessageType.VILLAGE));
 
         return true;
     }

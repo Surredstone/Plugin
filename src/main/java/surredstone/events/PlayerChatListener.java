@@ -5,6 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import surredstone.Message;
+import surredstone.MessageType;
+import surredstone.Sender;
 import surredstone.Village;
 
 public class PlayerChatListener implements Listener {
@@ -12,11 +14,11 @@ public class PlayerChatListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Village playerVillage = Village.getVillageByPlayer(event.getPlayer());
 
-        if (playerVillage == null) {
-            return;
-        }
-
-        new Message(event.getPlayer().getName(), event.getMessage(), false).sendVillageMessage(playerVillage);
+        Sender.sendMessage(playerVillage, new Message(
+                event.getPlayer().getName(),
+                event.getMessage(),
+                false,
+                MessageType.DEFAULT));
 
         event.setCancelled(true);
     }
