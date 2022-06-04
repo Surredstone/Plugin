@@ -22,8 +22,9 @@ public class Bot {
                             GatewayIntent.GUILD_MESSAGE_TYPING)
                     .addEventListeners(new ReadyListener())
                     .setActivity(Activity.playing(
-                            "Surredstone - "
-                                    + Plugin.getInstance().getOnlinePlayersString()))
+                            Presence.getPresenceMessage(
+                                    Presence.getCurrentOnlinePlayersMessage(
+                                            Plugin.getInstance().getServer().getOnlinePlayers().size()))))
                     .build();
 
         } catch (LoginException e) {
@@ -45,10 +46,6 @@ public class Bot {
         bot.shutdown();
     }
 
-    public void setPresence(String text) {
-        bot.getPresence().setActivity(Activity.playing("Surredstone - " + text));
-    }
-
     public void sendMessageToVillage(Village village, String message) {
         bot.getTextChannelById(village.getDiscordChannelId())
                 .sendMessage(message).complete();
@@ -57,5 +54,9 @@ public class Bot {
     public void sendMessageToMainChannel(String message) {
         bot.getTextChannelById(Plugin.getInstance().getDiscordMainChannelId())
                 .sendMessage(message).complete();
+    }
+
+    public void updatePresenceMessage(String message) {
+        bot.getPresence().setActivity(Activity.playing(message));
     }
 }
