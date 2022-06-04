@@ -4,12 +4,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import surredstone.Bot;
 import surredstone.Plugin;
+import surredstone.Presence;
 
 public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Bot.getInstance().setPresence(Plugin.getInstance().getOnlinePlayersString());
+        Presence.updatePresence(
+                Presence.getCurrentOnlinePlayersMessage(
+                        Plugin.getInstance().getServer().getOnlinePlayers().size()));
     }
 }
