@@ -19,6 +19,8 @@ public interface MessageLine {
             + "Voc\u00EA deve estar em uma vila para executar esse comando";
     String PLUGIN_DISABLE = ChatColor.RED + "Plugin Surredstone desabilitado";
     String PLUGIN_ENABLE = ChatColor.GREEN + "Plugin Surredstone habilitado";
+    String DC_SERVER_OPEN = "Servidor aberto";
+    String DC_SERVER_CLOSE = "Servidor fechado";
     String VILLAGE_LABEL = ChatColor.GOLD + "Vila";
     String VILLAGE_NOT_FOUND = ChatColor.RED + "Vila n\u00E3o encontrada";
 }
