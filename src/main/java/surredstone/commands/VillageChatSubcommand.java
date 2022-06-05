@@ -22,22 +22,22 @@ public class VillageChatSubcommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("COMMAND_EXECUTED_PLAYER"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("COMMAND_EXECUTED_PLAYER").getLog());
             return false;
         }
 
         if (village == null) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("VILLAGE_NOT_FOUND"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("VILLAGE_NOT_FOUND").getLog());
             return false;
         }
 
         if (Village.getVillageByPlayer((Player) sender) == null) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PLAYER_VILLAGE_NULL"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PLAYER_VILLAGE_NULL").getLog());
             return false;
         }
 
         if (String.valueOf(args).isBlank()) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL").getLog());
             return false;
         }
 

@@ -28,9 +28,4 @@ public enum DiscordLog {
     public String getLogEmote() {
         return emote;
     }
-
-    public DiscordLog setToken(String token, String value) {
-        this.message.replace("%" + token, value);
-        return this;
-    }
 }

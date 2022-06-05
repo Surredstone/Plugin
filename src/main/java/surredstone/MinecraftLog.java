@@ -52,9 +52,4 @@ public enum MinecraftLog {
     public ChatColor getLogColor() {
         return color;
     }
-
-    public MinecraftLog setToken(String token, String value) {
-        this.message.replace("%" + token, value);
-        return this;
-    }
 }

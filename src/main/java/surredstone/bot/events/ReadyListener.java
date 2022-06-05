@@ -8,10 +8,10 @@ import surredstone.Logger;
 public class ReadyListener extends ListenerAdapter {
     @Override
     public void onReady(ReadyEvent event) {
-        Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_OPEN"));
+        Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_OPEN").getLog());
 
         Logger.logConsoleLog(
-                Log.getMinecraftLog("BOT_LOGIN_SUCCESS")
-                        .setToken("bot_name", event.getJDA().getSelfUser().getName()));
+                Log.getMinecraftLog("BOT_LOGIN_SUCCESS").getLog()
+                        .replace("%bot_name", event.getJDA().getSelfUser().getName()));
     }
 }

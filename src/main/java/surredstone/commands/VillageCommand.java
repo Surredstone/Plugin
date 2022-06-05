@@ -14,7 +14,7 @@ public class VillageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL").getLog());
             return false;
         }
 
@@ -30,7 +30,7 @@ public class VillageCommand implements CommandExecutor {
             case "chat":
                 return new VillageChatSubcommand().setVillage(requestedVillage).onCommand(sender, command, label, args);
             default:
-                Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("INVALID_SUBCOMMAND"));
+                Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("INVALID_SUBCOMMAND").getLog());
                 return false;
         }
     }

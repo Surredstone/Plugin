@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 
 import surredstone.Log;
 import surredstone.Logger;
-import surredstone.MinecraftLog;
 import surredstone.Village;
 
 public class VillageInfoSubcommand implements CommandExecutor {
@@ -31,26 +30,26 @@ public class VillageInfoSubcommand implements CommandExecutor {
             villages.add(village);
         }
 
-        List<MinecraftLog> log = new ArrayList<MinecraftLog>();
+        List<String> logs = new ArrayList<String>();
 
         for (Village village : villages) {
-            log.add(
-                    Log.getMinecraftLog("VILLAGE_NAME")
-                            .setToken("village_color", village.getTextColor().toString())
-                            .setToken("village_abbreviation", village.getAbbreviation().toUpperCase())
-                            .setToken("village_name", village.getName()));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_NAME").getLog()
+                            .replace("%village_color", village.getTextColor().toString())
+                            .replace("%village_abbreviation", village.getAbbreviation().toUpperCase())
+                            .replace("%village_name", village.getName()));
 
-            log.add(
-                    Log.getMinecraftLog("VILLAGE_MEMBERS")
-                            .setToken("value", String.valueOf(village.getOnlinePlayers().size())));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_MEMBERS").getLog()
+                            .replace("%value", String.valueOf(village.getOnlinePlayers().size())));
 
-            log.add(
-                    Log.getMinecraftLog("VILLAGE_INFO")
-                            .setToken("value", String.valueOf(village.getOnlinePlayers().size())));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_INFO").getLog()
+                            .replace("%value", String.valueOf(village.getOnlinePlayers().size())));
         }
 
-        for (MinecraftLog line : log) {
-            Logger.logMinecraftPlayer((Player) sender, line);
+        for (String log : logs) {
+            Logger.logMinecraftPlayer((Player) sender, log);
         }
 
         return true;

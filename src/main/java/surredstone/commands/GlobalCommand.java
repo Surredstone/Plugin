@@ -14,7 +14,7 @@ public class GlobalCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("COMMAND_EXECUTED_PLAYER"));
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("COMMAND_EXECUTED_PLAYER").getLog());
             return false;
         }
 

@@ -31,13 +31,13 @@ public class Plugin extends JavaPlugin {
 
         Bot.getInstance(getConfig().getString("discord.token"));
 
-        Logger.logConsoleLog(Log.getMinecraftLog("PLUGIN_ENABLE"));
+        Logger.logConsoleLog(Log.getMinecraftLog("PLUGIN_ENABLE").getLog());
     }
 
     @Override
     public void onDisable() {
         Bot.stop();
-        Logger.logConsoleLog(Log.getMinecraftLog("PLUGIN_DISABLE"));
+        Logger.logConsoleLog(Log.getMinecraftLog("PLUGIN_DISABLE").getLog());
     }
 
     private static Plugin getInstance() {

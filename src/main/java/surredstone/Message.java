@@ -106,13 +106,13 @@ public class Message {
         return String.join(" ", components);
     }
 
-    public MinecraftLog toMinecraftLog() {
-        return Log.getMinecraftLog("MESSAGE")
-                .setToken("message_syntax", generateMinecraftMessage());
+    public String toMinecraftLog() {
+        return Log.getMinecraftLog("MESSAGE").getLog()
+                .replace("%message_syntax", generateMinecraftMessage());
     }
 
-    public DiscordLog toDiscordLog() {
-        return Log.getDiscordLog("MESSAGE")
-                .setToken("message_syntax", generateDiscordMessage());
+    public String toDiscordLog() {
+        return Log.getDiscordLog("MESSAGE").getLog()
+                .replace("%message_syntax", generateDiscordMessage());
     }
 }
