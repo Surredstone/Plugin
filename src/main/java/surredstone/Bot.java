@@ -7,7 +7,6 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import surredstone.bot.events.ReadyListener;
-import surredstone.bot.events.ShutdownListener;
 
 public class Bot {
     private static Bot _instance;
@@ -22,7 +21,6 @@ public class Bot {
                             GatewayIntent.GUILD_PRESENCES,
                             GatewayIntent.GUILD_MESSAGE_TYPING)
                     .addEventListeners(new ReadyListener())
-                    .addEventListeners(new ShutdownListener())
                     .setActivity(Activity.playing(
                             Presence.getPresenceMessage(
                                     Presence.getCurrentOnlinePlayersMessage(
@@ -45,7 +43,9 @@ public class Bot {
     }
 
     public static void stop() {
-        getInstance().bot.shutdownNow();
+        sendMessageToMainChannel(MessageLine.DC_SERVER_CLOSE);
+        Plugin.consoleLog(MessageLine.BOT_SHUTDOWN_SUCCESS);
+        getInstance().bot.shutdown();
     }
 
     public static void sendMessageToVillage(Village village, String message) {

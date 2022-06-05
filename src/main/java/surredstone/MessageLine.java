@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 public interface MessageLine {
     String BOT_LOGIN_FAILURE = ChatColor.RED + "Falha ao conectar ao Discord";
     String BOT_LOGIN_SUCCESS = ChatColor.GREEN + "Bot connectado como %s";
-    String BOT_SHUTDOWN_SUCCESS = ChatColor.GREEN + "Bot desconectado";
+    String BOT_SHUTDOWN_SUCCESS = ChatColor.RED + "Bot desconectado";
     String COMMAND_EXECUTED_PLAYER = ChatColor.RED
             + "Este comando deve ser executado por um player";
     String DISCORD_LABEL = String.format("%s%sDC", ChatColor.BOLD, ChatColor.BLUE);
