@@ -2,18 +2,16 @@ package surredstone.bot.events;
 
 import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import surredstone.Bot;
-import surredstone.MessageLine;
-import surredstone.Plugin;
+import surredstone.Log;
+import surredstone.Logger;
 
 public class ReadyListener extends ListenerAdapter {
     @Override
     public void onReady(ReadyEvent event) {
-        Plugin.consoleLog(
-                String.format(
-                        MessageLine.BOT_LOGIN_SUCCESS,
-                        event.getJDA().getSelfUser().getName()));
+        Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_OPEN"));
 
-        Bot.sendMessageToMainChannel(MessageLine.DC_SERVER_OPEN);
+        Logger.logConsoleLog(
+                Log.getMinecraftLog("BOT_LOGIN_SUCCESS")
+                        .setToken("bot_name", event.getJDA().getSelfUser().getName()));
     }
 }

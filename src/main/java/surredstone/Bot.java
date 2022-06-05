@@ -28,7 +28,7 @@ public class Bot {
                     .build();
 
         } catch (LoginException e) {
-            Plugin.consoleLog(MessageLine.BOT_LOGIN_FAILURE);
+            Logger.logConsoleLog(Log.getMinecraftLog("BOT_LOGIN_FAILURE"));
         }
     }
 
@@ -43,8 +43,8 @@ public class Bot {
     }
 
     public static void stop() {
-        sendMessageToMainChannel(MessageLine.DC_SERVER_CLOSE);
-        Plugin.consoleLog(MessageLine.BOT_SHUTDOWN_SUCCESS);
+        Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_CLOSE"));
+        Logger.logConsoleLog(Log.getMinecraftLog("BOT_SHUTDOWN_SUCCESS"));
         getInstance().bot.shutdown();
     }
 

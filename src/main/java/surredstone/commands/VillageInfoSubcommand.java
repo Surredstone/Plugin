@@ -3,12 +3,14 @@ package surredstone.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import surredstone.MessageLine;
+import surredstone.Log;
+import surredstone.Logger;
+import surredstone.MinecraftLog;
 import surredstone.Village;
 
 public class VillageInfoSubcommand implements CommandExecutor {
@@ -29,26 +31,26 @@ public class VillageInfoSubcommand implements CommandExecutor {
             villages.add(village);
         }
 
-        List<String> message = new ArrayList<String>();
+        List<MinecraftLog> log = new ArrayList<MinecraftLog>();
 
         for (Village village : villages) {
-            message.add(String.format(
-                    "%s[%s] %s",
-                    village.getTextColor(),
-                    village.getAbbreviation().toUpperCase(),
-                    village.getName()));
+            log.add(
+                    Log.getMinecraftLog("VILLAGE_NAME")
+                            .setToken("village_color", village.getTextColor().toString())
+                            .setToken("village_abbreviation", village.getAbbreviation().toUpperCase())
+                            .setToken("village_name", village.getName()));
 
-            message.add(String.format(
-                    MessageLine.MEMBERS_LABEL,
-                    ChatColor.WHITE + String.valueOf(village.getOnlinePlayers().size())));
+            log.add(
+                    Log.getMinecraftLog("VILLAGE_MEMBERS")
+                            .setToken("value", String.valueOf(village.getOnlinePlayers().size())));
 
-            message.add(String.format(
-                    MessageLine.INFO_LABEL,
-                    ChatColor.WHITE + village.getInfo()));
+            log.add(
+                    Log.getMinecraftLog("VILLAGE_INFO")
+                            .setToken("value", String.valueOf(village.getOnlinePlayers().size())));
         }
 
-        for (String line : message) {
-            sender.sendMessage(line);
+        for (MinecraftLog line : log) {
+            Logger.logMinecraftPlayer((Player) sender, line);
         }
 
         return true;

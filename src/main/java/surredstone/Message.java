@@ -35,37 +35,84 @@ public class Message {
                         : senderVillage.getAbbreviation().toUpperCase());
     }
 
-    public String generateMessage() {
+    public String getDiscordIndicator() {
+        return (fromDiscord) ? ChatColor.BLUE + "DC" : null;
+    }
+
+    public String getTypeIndicator() {
+        switch (type) {
+            case VILLAGE:
+                return ChatColor.GOLD + "[V]";
+            case GLOBAL:
+                return ChatColor.GOLD + "[G]";
+            default:
+                return null;
+        }
+    }
+
+    public String getPlayerVillageIndicator() {
+        switch (type) {
+            case VILLAGE:
+                return getSenderVillageInformation("name");
+            case GLOBAL:
+                return getSenderVillageInformation("name");
+            default:
+                return getSenderVillageInformation("abbreviation");
+        }
+    }
+
+    public String getUsernameIndicator() {
+        return ((senderVillage != null)
+                ? senderVillage.getTextColor()
+                : "") + senderName + ":";
+    }
+
+    public String getMessageContent() {
+        return ChatColor.WHITE + message;
+    }
+
+    public void sanitizeMessageContent(List<String> components) {
+        components.removeIf(component -> (component == null));
+    }
+
+    public String uncolorMessage(String message) {
+        return ChatColor.stripColor(message);
+    }
+
+    public String generateDiscordMessage() {
         List<String> components = new ArrayList<String>();
 
-        components.add((fromDiscord) ? MessageLine.DISCORD_LABEL : null);
+        if (type == MessageType.GLOBAL)
+            components.add(getPlayerVillageIndicator());
+        components.add(getUsernameIndicator());
+        components.add(getMessageContent());
 
-        switch (type) {
-            case DEFAULT:
-                components.add(getSenderVillageInformation("abbreviation"));
-                break;
-            case VILLAGE:
-                components.add(MessageLine.VILLAGE_LABEL);
-                components.add(getSenderVillageInformation("name"));
-                break;
-            case GLOBAL:
-                components.add(MessageLine.GLOBAL_LABEL);
-                components.add(getSenderVillageInformation("name"));
-                break;
-        }
+        sanitizeMessageContent(components);
 
-        components.add(((senderVillage != null)
-                ? senderVillage.getTextColor()
-                : "") + senderName + ":");
+        return uncolorMessage(String.join(" ", components));
+    }
 
-        components.add(ChatColor.WHITE + message);
+    public String generateMinecraftMessage() {
+        List<String> components = new ArrayList<String>();
 
-        components.removeIf(component -> (component == null));
+        components.add(getDiscordIndicator());
+        components.add(getTypeIndicator());
+        components.add(getPlayerVillageIndicator());
+        components.add(getUsernameIndicator());
+        components.add(getMessageContent());
+
+        sanitizeMessageContent(components);
 
         return String.join(" ", components);
     }
 
-    public String generateMessageUncolor() {
-        return ChatColor.stripColor(generateMessage());
+    public MinecraftLog toMinecraftLog() {
+        return Log.getMinecraftLog("MESSAGE")
+                .setToken("message_syntax", generateMinecraftMessage());
+    }
+
+    public DiscordLog toDiscordLog() {
+        return Log.getDiscordLog("MESSAGE")
+                .setToken("message_syntax", generateDiscordMessage());
     }
 }

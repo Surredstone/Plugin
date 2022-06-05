@@ -4,15 +4,17 @@ import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import surredstone.MessageLine;
+import surredstone.Log;
+import surredstone.Logger;
 import surredstone.Village;
 
 public class VillageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(MessageLine.PARAMETERS_NULL);
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL"));
             return false;
         }
 
@@ -28,7 +30,7 @@ public class VillageCommand implements CommandExecutor {
             case "chat":
                 return new VillageChatSubcommand().setVillage(requestedVillage).onCommand(sender, command, label, args);
             default:
-                sender.sendMessage(MessageLine.INVALID_SUBCOMMAND);
+                Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("INVALID_SUBCOMMAND"));
                 return false;
         }
     }
