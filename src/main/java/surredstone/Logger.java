@@ -14,6 +14,13 @@ public class Logger {
         logDiscordVillage(village, discordLog);
     }
 
+    public static void logVillage(Village village, String minecraftLog, String discordLog, Player sender) {
+        logMinecraftVillage(village, minecraftLog);
+        logDiscordVillage(village, discordLog);
+        if (Village.getVillageByPlayer(sender) != village)
+            logMinecraftPlayer(sender, minecraftLog);
+    }
+
     public static void logConsoleLog(String log) {
         Plugin.consoleLog(log);
     }
