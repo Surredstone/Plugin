@@ -47,7 +47,7 @@ public class VillageChatSubcommand implements CommandExecutor {
                 false,
                 MessageType.VILLAGE);
 
-        Logger.logVillage(village, message.toMinecraftLog(), message.toDiscordLog());
+        Logger.logVillage(village, message.toMinecraftLog(), message.toDiscordLog(), (Player) sender);
 
         return true;
     }
