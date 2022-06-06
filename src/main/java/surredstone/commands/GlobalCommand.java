@@ -18,6 +18,11 @@ public class GlobalCommand implements CommandExecutor {
             return false;
         }
 
+        if (args.length == 0) {
+            Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL").getLog());
+            return false;
+        }
+
         Message message = new Message(
                 sender.getName(),
                 String.join(" ", args),
