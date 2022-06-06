@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Collection;
 
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import surredstone.commands.GlobalCommand;
@@ -21,6 +23,8 @@ public class Plugin extends JavaPlugin {
 
         saveDefaultConfig();
         saveResource("villages.yml", false);
+
+        registerVillagePermissions();
 
         getServer().getPluginManager().registerEvents(new PlayerChatListener(), getInstance());
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getInstance());
@@ -42,6 +46,14 @@ public class Plugin extends JavaPlugin {
 
     private static Plugin getInstance() {
         return _instance;
+    }
+
+    private void registerVillagePermissions() {
+        for (Village village : Village.getAllVillages()) {
+            getInstance().getServer().getPluginManager().addPermission(
+                new Permission(village.getPermission(), PermissionDefault.FALSE)
+            );
+        }
     }
 
     public static String getDiscordMainChannelId() {
