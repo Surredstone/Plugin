@@ -27,7 +27,7 @@ public class Village {
             String info,
             String discordChannel) {
         if (abbreviation.contains(" ") || abbreviation.contains("   "))
-            throw new Error(MessageLine.INVALID_VILLAGE_STORAGE);
+            throw new Error(Log.getDiscordLog("INVALID_VILLAGE_STORAGE").getLog());
 
         this.id = id;
         this.name = name;
@@ -38,7 +38,7 @@ public class Village {
     }
 
     static private YamlConfiguration getVillageStorage() {
-        return YamlConfiguration.loadConfiguration(new File(Plugin.getInstance().getDataFolder() + "/villages.yml"));
+        return YamlConfiguration.loadConfiguration(new File(Plugin.getDataFolderFile() + "/villages.yml"));
     }
 
     static public List<Village> getAllVillages() {
@@ -92,7 +92,7 @@ public class Village {
     }
 
     public List<Player> getOnlinePlayers() {
-        Collection<? extends Player> onlinePlayers = Plugin.getInstance().getServer().getOnlinePlayers();
+        Collection<? extends Player> onlinePlayers = Plugin.getOnlinePlayers();
 
         List<Player> players = new ArrayList<Player>();
 

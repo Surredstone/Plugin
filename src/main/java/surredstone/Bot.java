@@ -24,11 +24,11 @@ public class Bot {
                     .setActivity(Activity.playing(
                             Presence.getPresenceMessage(
                                     Presence.getCurrentOnlinePlayersMessage(
-                                            Plugin.getInstance().getServer().getOnlinePlayers().size()))))
+                                            Plugin.getOnlinePlayers().size()))))
                     .build();
 
         } catch (LoginException e) {
-            Plugin.getInstance().getServer().getConsoleSender().sendMessage(MessageLine.BOT_LOGIN_FAILURE);
+            Logger.logConsoleLog(Log.getMinecraftLog("BOT_LOGIN_FAILURE").getLog());
         }
     }
 
@@ -38,25 +38,27 @@ public class Bot {
         return _instance;
     }
 
-    public static Bot getInstance() {
+    private static Bot getInstance() {
         return _instance;
     }
 
-    public void stop() {
-        bot.shutdown();
+    public static void stop() {
+        Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_CLOSE").getLog());
+        Logger.logConsoleLog(Log.getMinecraftLog("BOT_SHUTDOWN_SUCCESS").getLog());
+        getInstance().bot.shutdown();
     }
 
-    public void sendMessageToVillage(Village village, String message) {
-        bot.getTextChannelById(village.getDiscordChannelId())
+    public static void sendMessageToVillage(Village village, String message) {
+        getInstance().bot.getTextChannelById(village.getDiscordChannelId())
                 .sendMessage(message).complete();
     }
 
-    public void sendMessageToMainChannel(String message) {
-        bot.getTextChannelById(Plugin.getInstance().getDiscordMainChannelId())
+    public static void sendMessageToMainChannel(String message) {
+        getInstance().bot.getTextChannelById(Plugin.getDiscordMainChannelId())
                 .sendMessage(message).complete();
     }
 
-    public void updatePresenceMessage(String message) {
-        bot.getPresence().setActivity(Activity.playing(message));
+    public static void updatePresenceMessage(String message) {
+        getInstance().bot.getPresence().setActivity(Activity.playing(message));
     }
 }

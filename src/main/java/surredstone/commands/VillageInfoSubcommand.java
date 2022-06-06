@@ -3,12 +3,13 @@ package surredstone.commands;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import surredstone.MessageLine;
+import surredstone.Log;
+import surredstone.Logger;
 import surredstone.Village;
 
 public class VillageInfoSubcommand implements CommandExecutor {
@@ -29,26 +30,26 @@ public class VillageInfoSubcommand implements CommandExecutor {
             villages.add(village);
         }
 
-        List<String> message = new ArrayList<String>();
+        List<String> logs = new ArrayList<String>();
 
         for (Village village : villages) {
-            message.add(String.format(
-                    "%s[%s] %s",
-                    village.getTextColor(),
-                    village.getAbbreviation().toUpperCase(),
-                    village.getName()));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_NAME").getLog()
+                            .replace("%village_color", village.getTextColor().toString())
+                            .replace("%village_abbreviation", village.getAbbreviation().toUpperCase())
+                            .replace("%village_name", village.getName()));
 
-            message.add(String.format(
-                    MessageLine.MEMBERS_LABEL,
-                    ChatColor.WHITE + String.valueOf(village.getOnlinePlayers().size())));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_MEMBERS").getLog()
+                            .replace("%value", String.valueOf(village.getOnlinePlayers().size())));
 
-            message.add(String.format(
-                    MessageLine.INFO_LABEL,
-                    ChatColor.WHITE + village.getInfo()));
+            logs.add(
+                    Log.getMinecraftLog("VILLAGE_INFO").getLog()
+                            .replace("%value", String.valueOf(village.getOnlinePlayers().size())));
         }
 
-        for (String line : message) {
-            sender.sendMessage(line);
+        for (String log : logs) {
+            Logger.logMinecraftPlayer((Player) sender, log);
         }
 
         return true;
