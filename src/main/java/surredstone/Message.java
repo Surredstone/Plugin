@@ -82,7 +82,9 @@ public class Message {
     public String generateDiscordMessage() {
         List<String> components = new ArrayList<String>();
 
-        if (type == MessageType.GLOBAL)
+        if (type == MessageType.VILLAGE)
+            components.add(getTypeIndicator());
+        if (type != MessageType.DEFAULT)
             components.add(getPlayerVillageIndicator());
         components.add(getUsernameIndicator());
         components.add(getMessageContent());
