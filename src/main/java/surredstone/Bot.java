@@ -5,6 +5,7 @@ import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.SelfUser;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import surredstone.bot.events.MessageReceivedListener;
@@ -45,10 +46,14 @@ public class Bot {
         return _instance;
     }
 
+    public static SelfUser getBotUser() {
+        return getInstance().bot.getSelfUser();
+    }
+
     public static void stop() {
         Logger.logDiscordGlobal(Log.getDiscordLog("SERVER_CLOSE").getLog());
         Logger.logConsoleLog(Log.getMinecraftLog("BOT_SHUTDOWN_SUCCESS").getLog());
-        getInstance().bot.shutdown();
+        getInstance().bot.shutdownNow();
     }
 
     public static TextChannel getGlobalChannel() {

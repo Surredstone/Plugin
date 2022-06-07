@@ -51,8 +51,7 @@ public class Plugin extends JavaPlugin {
     private void registerVillagePermissions() {
         for (Village village : Village.getAllVillages()) {
             getInstance().getServer().getPluginManager().addPermission(
-                new Permission(village.getPermission(), PermissionDefault.FALSE)
-            );
+                    new Permission(village.getPermission(), PermissionDefault.FALSE));
         }
     }
 

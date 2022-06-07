@@ -11,12 +11,15 @@ import surredstone.Village;
 public class MessageReceivedListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if (event.getMember().getUser().isBot()) {
+            return;
+        }
 
-        if (event.getChannel() == Bot.getGlobalChannel()) {
-            Logger.logMinecraftGlobal(
+        if (event.getChannel().getId().contentEquals(Bot.getGlobalChannel().getId())) {
+            Logger.logMinecraftGlobalAndConsole(
                     new Message(
-                            event.getAuthor().getName(),
-                            event.getMessage().getContentRaw(),
+                            event.getMember().getEffectiveName(),
+                            event.getMessage().getContentStripped(),
                             true,
                             MessageType.GLOBAL).toMinecraftLog());
 
@@ -24,12 +27,12 @@ public class MessageReceivedListener extends ListenerAdapter {
         }
 
         for (Village village : Village.getAllVillages()) {
-            if (event.getChannel() == Bot.getVillageChannel(village)) {
+            if (event.getChannel().getId().contentEquals(Bot.getVillageChannel(village).getId())) {
                 Logger.logMinecraftVillage(
                         village,
                         new Message(
-                                event.getAuthor().getName(),
-                                event.getMessage().getContentRaw(),
+                                event.getMember().getEffectiveName(),
+                                event.getMessage().getContentDisplay(),
                                 true,
                                 MessageType.VILLAGE).toMinecraftLog());
 

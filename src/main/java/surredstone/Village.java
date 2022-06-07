@@ -82,6 +82,9 @@ public class Village {
     }
 
     static public Village getVillageByPlayer(Player player) {
+        if (player == null)
+            return null;
+
         for (Village village : getAllVillages()) {
             if (player.hasPermission(village.getPermission())) {
                 return village;
