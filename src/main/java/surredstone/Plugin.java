@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Collection;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import surredstone.commands.GlobalCommand;
 import surredstone.commands.VillageCommand;
 import surredstone.events.PlayerChatListener;
+import surredstone.events.PlayerDeathListener;
 import surredstone.events.PlayerJoinListener;
 import surredstone.events.PlayerQuitListener;
 
@@ -26,9 +28,10 @@ public class Plugin extends JavaPlugin {
 
         registerVillagePermissions();
 
-        getServer().getPluginManager().registerEvents(new PlayerChatListener(), getInstance());
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), getInstance());
-        getServer().getPluginManager().registerEvents(new PlayerQuitListener(), getInstance());
+        registerEvent(new PlayerChatListener());
+        registerEvent(new PlayerJoinListener());
+        registerEvent(new PlayerQuitListener());
+        registerEvent(new PlayerDeathListener());
 
         getCommand("global").setExecutor(new GlobalCommand());
         getCommand("village").setExecutor(new VillageCommand());
@@ -53,6 +56,10 @@ public class Plugin extends JavaPlugin {
             getInstance().getServer().getPluginManager().addPermission(
                     new Permission(village.getPermission(), PermissionDefault.FALSE));
         }
+    }
+
+    private void registerEvent(Listener listener) {
+        getServer().getPluginManager().registerEvents(listener, getInstance());
     }
 
     public static String getDiscordMainChannelId() {
