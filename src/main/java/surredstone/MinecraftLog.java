@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 
 public enum MinecraftLog {
     ACHIEVEMENT("green", "%player conseguiu a conquista %achievement"),
-    PLAYER_DEATH("red", "%player morreu."),
     PLAYER_JOIN("green", "%player entrou no servidor"),
     PLAYER_QUIT("red", "%player saiu do servidor"),
     PLUGIN_ENABLE("green", "Plugin Surredstone habilitado"),
