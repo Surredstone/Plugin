@@ -1,7 +1,6 @@
 package surredstone;
 
 public enum DiscordLog {
-    PLAYER_ADVANCEMENT(":emote:", "%player conseguiu a conquista %advancement"),
     PLAYER_DEATH(":emote:", "%death_message"),
     PLAYER_JOIN(":emote:", "%player entrou no servidor"),
     PLAYER_QUIT(":emote:", "%player saiu do servidor"),
