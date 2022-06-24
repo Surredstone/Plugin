@@ -33,6 +33,11 @@ public class Logger {
         Bot.sendMessageToVillage(village, log);
     }
 
+    public static void logMinecraftGlobalAndConsole(String log) {
+        logMinecraftGlobal(log);
+        logConsoleLog(log);
+    }
+
     public static void logMinecraftGlobal(String log) {
         for (Player player : Plugin.getOnlinePlayers()) {
             player.sendMessage(log);

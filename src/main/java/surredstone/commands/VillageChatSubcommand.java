@@ -36,7 +36,7 @@ public class VillageChatSubcommand implements CommandExecutor {
             return false;
         }
 
-        if (String.valueOf(args).isBlank()) {
+        if (args.length == 0) {
             Logger.logMinecraftPlayer((Player) sender, Log.getMinecraftLog("PARAMETERS_NULL").getLog());
             return false;
         }

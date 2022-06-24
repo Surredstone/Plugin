@@ -1,12 +1,11 @@
 package surredstone;
 
 public enum DiscordLog {
-    ACHIEVEMENT(":emote:", "%player conseguiu a conquista %achievement"),
-    PLAYER_DEATH(":emote:", "%death_message"),
-    PLAYER_JOIN(":emote:", "%player entrou no servidor"),
-    PLAYER_QUIT(":emote:", "%player saiu do servidor"),
-    SERVER_OPEN(":emote:", "Servidor aberto"),
-    SERVER_CLOSE(":emote:", "Servidor fechado"),
+    PLAYER_DEATH(":skull:", "%death_message"),
+    PLAYER_JOIN(":thumbsup:", "%player entrou no servidor"),
+    PLAYER_QUIT(":thumbsdown:", "%player saiu do servidor"),
+    SERVER_OPEN(":white_check_mark:", "Servidor aberto"),
+    SERVER_CLOSE(":octagonal_sign:", "Servidor fechado"),
     MESSAGE("", "%message_syntax");
 
     public String emote;

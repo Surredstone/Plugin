@@ -62,9 +62,8 @@ public class Message {
     }
 
     public String getUsernameIndicator() {
-        return ((senderVillage != null)
-                ? senderVillage.getTextColor()
-                : "") + senderName + ":";
+        return ((senderVillage == null) ? ChatColor.WHITE : senderVillage.getTextColor()) +
+                ((senderPlayer == null) ? senderName : senderPlayer.getName()) + ":";
     }
 
     public String getMessageContent() {

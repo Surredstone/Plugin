@@ -3,10 +3,6 @@ package surredstone;
 import org.bukkit.ChatColor;
 
 public enum MinecraftLog {
-    ACHIEVEMENT("green", "%player conseguiu a conquista %achievement"),
-    PLAYER_DEATH("red", "%death_message"),
-    PLAYER_JOIN("green", "%player entrou no servidor"),
-    PLAYER_QUIT("red", "%player saiu do servidor"),
     PLUGIN_ENABLE("green", "Plugin Surredstone habilitado"),
     PLUGIN_DISABLE("red", "Plugin Surredstone desabilitado"),
     BOT_LOGIN_FAILURE("red", "Falha ao conectar ao Discord"),
