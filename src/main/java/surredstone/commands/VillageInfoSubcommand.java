@@ -45,7 +45,7 @@ public class VillageInfoSubcommand implements CommandExecutor {
 
             logs.add(
                     Log.getMinecraftLog("VILLAGE_INFO").getLog()
-                            .replace("%value", String.valueOf(village.getOnlinePlayers().size())));
+                            .replace("%value", String.valueOf(village.getInfo())));
         }
 
         for (String log : logs) {
