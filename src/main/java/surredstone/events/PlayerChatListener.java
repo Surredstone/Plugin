@@ -14,6 +14,10 @@ public class PlayerChatListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Village playerVillage = Village.getVillageByPlayer(event.getPlayer());
 
+        if (playerVillage == null) {
+            return;
+        }
+
         Message message = new Message(
                 event.getPlayer().getName(),
                 event.getMessage(),
